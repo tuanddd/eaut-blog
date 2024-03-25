@@ -34,11 +34,19 @@ export const getOne = async (slug: string) => {
 
 // Delete a category
 export const deleteOne = async (slug: string) => {
-  const data = await prisma.category.delete({
-    where: {
-      slug: slug,
-    },
-  });
+  //TODO: Delete all all commetn of threads first
+  const data = await prisma.$transaction([
+    prisma.thread.deleteMany({
+      where: {
+        catSlug: slug,
+      },
+    }),
+    prisma.category.delete({
+      where: {
+        slug: slug,
+      },
+    }),
+  ]);
   return data;
 };
 
@@ -49,16 +57,18 @@ interface CreateCategory {
   color: "sky" | "rose" | "red" | "purple" | "yellow" | "green";
 }
 export const createOne = async (body: CreateCategory) => {
+  //TODO: Auth role first
   const data = await prisma.category.create({
     data: { ...body },
   });
   return data;
 };
 
-export const editOne = async (slug: string, body: any) => {
+export const editOne = async (id: string, body: any) => {
+  //TODO: Auth role first
   const data = await prisma.category.update({
     where: {
-      slug: slug,
+      id: id,
     },
     data: { ...body },
   });

@@ -116,7 +116,7 @@ model Notification {
   content String
   createdAt DateTime @default(now())
   startFrom DateTime @default(now())
-  endTo DateTime 
+  endTo DateTime? 
   isExpired Boolean @default(false)
   isStarted Boolean @default(false)
   isModified Boolean @default(false)

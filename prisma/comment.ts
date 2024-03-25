@@ -53,11 +53,13 @@ export const createOne = async (body: CreateComment) => {
 };
 
 //Vote a comment
-export const voteOne = async (
+export const voteComment = async (
   type: "UPVOTE" | "DOWNVOTE",
   id: string,
   userEmail: string,
 ) => {
+  //TODO: Check User first then Replace userEmail with session
+
   const data = await prisma.comment.update({
     where: {
       id: id,

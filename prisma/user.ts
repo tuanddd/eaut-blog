@@ -13,11 +13,13 @@ export const getOne = async (id: string) => {
 };
 
 export const deleteOne = async (id: string) => {
+  //TODO: Auth role first
   const user = await prisma.user.delete({
     where: { id: id },
   });
   return user;
 };
+
 
 //TODO: Add user here
 // interface CreateOne {

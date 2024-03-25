@@ -11,13 +11,15 @@ import prisma from "@/lib/connect";
 
 // Get a list of threads
 export const getAll = async (
-  catSlug: string,
   postPerPage: number,
   page: number,
+  catSlug: string,
+  userEmail: string,
 ) => {
   const data = await prisma.thread.findMany({
     where: {
       ...(catSlug && { catSlug }),
+      ...(userEmail && { userEmail }),
     },
     include: {
       user: {
@@ -72,6 +74,8 @@ interface CreateThread {
 }
 
 export const createOne = async (body: CreateThread | any) => {
+  //TODO: Check role first
+  //First check if slug has already existed
   const found = await prisma.thread.findUnique({
     where: {
       slug: body.slug,
@@ -80,6 +84,7 @@ export const createOne = async (body: CreateThread | any) => {
   if (found)
     return Response.json(null, { status: 400, statusText: "DUPLICATED" });
 
+  // Create new Thread
   const data = await prisma.thread.create({
     data: {
       title: body.title,
@@ -102,6 +107,7 @@ interface EditOne {
   catSlug: string;
 }
 export const editOne = async (slug: string, body: EditOne) => {
+  //TODO: Check role or Author of this Thread firstt
   const data = await prisma.thread.update({
     where: {
       slug: slug,
@@ -114,20 +120,29 @@ export const editOne = async (slug: string, body: EditOne) => {
 
 //Delete a thread
 export const deleteOne = async (slug: string) => {
-  const data = await prisma.thread.delete({
-    where: {
-      slug: slug,
-    },
-  });
+  //TODO: Check Role or Author of this Thread first
+  // Delete all comment of thread first then delete thread
+  const data = await prisma.$transaction([
+    prisma.comment.deleteMany({
+      where: { threadSlug: slug },
+    }),
+    prisma.thread.delete({
+      where: {
+        slug: slug,
+      },
+    }),
+  ]);
   return data;
 };
 
 // Vote a thread
-export const vote = async (
+export const voteThread = async (
   type: "UPVOTE" | "DOWNVOTE",
   userEmail: string,
   slug: string,
 ) => {
+  //TODO: Check User first then Replace userEmail with session
+
   const data = await prisma.thread.update({
     where: {
       slug: slug,
