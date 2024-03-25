@@ -25,8 +25,8 @@ export const getAll = async (
       cat: {
         select: {
           title: true,
-          color: true
-        }
+          color: true,
+        },
       },
       user: {
         select: {
@@ -60,6 +60,11 @@ export const getOne = async (slug: string) => {
           email: true,
           name: true,
           image: true,
+        },
+      },
+      _count: {
+        select: {
+          comments: true,
         },
       },
       vote: true,
