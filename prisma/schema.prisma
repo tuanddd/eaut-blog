@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  NONE
+  USER
+  WRITER
+  MODERATOR
+  ADMIN
+}
+
+enum VoteType {
+  UPVOTE
+  DOWNVOTE
+}
+
+// Account schema
+model Account {
+  id                String  @id @default(cuid()) @map("_id")
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid()) @map("_id")
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid()) @map("_id")
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  threads       Thread[]
+  comments      Comment[]
+  votes         Vote[]
+  notifications Notification[]
+  Role          Role @default(USER)
+}
+
+model VerificationToken {
+  identifier String   @id @map("_id")
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+//Account Schema
+
+model Category {
+  id        String   @id @default(cuid()) @map("_id")
+  slug      String   @unique
+  title     String
+  threads   Thread[]
+  color     String
+  createdAt DateTime @default(now())
+}
+
+model Thread {
+  id        String    @id @default(cuid()) @map("_id")
+  slug      String    @unique
+  title     String
+  desc      String?
+  content   String
+  thumbnail String?
+  views     Int       @default(0)
+  createdAt DateTime  @default(now())
+  catSlug   String
+  cat       Category  @relation(fields: [catSlug], references: [slug])
+  userEmail String
+  user      User      @relation(fields: [userEmail], references: [email])
+  comments  Comment[]
+  vote      Vote[]
+}
+
+model Comment {
+  id        String   @id @default(cuid()) @map("_id")
+  content   String
+  createdAt DateTime @default(now())
+  threadSlug  String
+  thread      Thread     @relation(fields: [threadSlug], references: [slug])
+  userEmail String
+  user      User     @relation(fields: [userEmail], references: [email])
+  vote      Vote[]
+}
+
+model Notification {
+  id String @id @default(cuid()) @map("_id")
+  title String
+  content String
+  createdAt DateTime @default(now())
+  startFrom DateTime @default(now())
+  endTo DateTime 
+  isExpired Boolean
+  isStarted Boolean
+  userEmail String
+  user User @relation(fields: [userEmail], references: [email])
+}
+
+model Vote {
+  id String @id @default(cuid()) @map("_id")
+  type VoteType
+  userEmail String
+  user User @relation(fields: [userEmail], references: [email])
+  commentId String?
+  comment Comment? @relation(fields: [commentId], references: [id])
+  threadSlug String?
+  thread Thread? @relation(fields: [threadSlug], references: [slug])
+  createdAt DateTime @default(now())
+}

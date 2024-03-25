@@ -13,7 +13,9 @@ export type UserType = {
   image?: string;
   createdAt?: Date;
   threads?: Thread[];
-  comments?: Comment[];
+  comments?: CommentType[];
+  votes?: VoteType[];
+  notifications?: NotificationType[];
   role: Role;
 };
 
@@ -21,7 +23,6 @@ export type CategoryType = {
   id: string;
   slug: string;
   title: string;
-  desc?: string;
   color: string;
   createdAt: Date;
   threads?: Thread[];
