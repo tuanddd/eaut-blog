@@ -1,6 +1,8 @@
 // import BlogSide from "@/components/page/blog/blog-side";
+import BlogSide from "@/components/(page)/blog/blog-side";
 import BlogTitle from "@/components/(page)/blog/blog-title";
 import FeaturedPostBlog from "@/components/(page)/blog/featured-blog";
+import RecentThreads from "@/components/(page)/homepage/recent-threads";
 import { BASE_API_URL } from "@/lib/constants";
 import { Category } from "@/type";
 // import FeaturedPostBlog from "@/components/page/blog/featured-post";
@@ -53,13 +55,13 @@ const BlogPage = async ({ searchParams }: Props) => {
       <FeaturedPostBlog data={data[0]} />
       <div className="flex gap-5">
         <div className="flex-[3]">
-          {/* <RecentPosts
+          <RecentThreads
             className="flex flex-col gap-0 md:gap-0"
             itemOrientation="horizontal"
             data={data}
-          /> */}
+          />
         </div>
-        {/* <BlogSide /> */}
+        <BlogSide />
       </div>
     </div>
   );
