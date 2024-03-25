@@ -1,4 +1,4 @@
-import { Category } from "@/lib/defination";
+import { Category } from "@/type";
 import Link from "next/link";
 
 const CategoryItem = ({ data }: { data: Category }) => {

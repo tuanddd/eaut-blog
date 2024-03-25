@@ -1,4 +1,4 @@
-import CategorySection from "@/components/(page)/homepage/category/category-section";
+import CategorySection from "@/components/(page)/homepage/category-section/category-section";
 import FeaturedThread from "@/components/(page)/homepage/featured-thread";
 import HomeStatus from "@/components/(page)/homepage/home-status";
 import NotificationSection from "@/components/(page)/homepage/notification/notification-section";

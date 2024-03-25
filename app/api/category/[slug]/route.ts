@@ -1,5 +1,22 @@
-import { deleteOne, editOne } from "@/prisma/category";
+import { deleteOne, editOne, getOne } from "@/prisma/category";
 import { NextRequest, NextResponse } from "next/server";
+
+export const GET = async (
+  req: NextRequest,
+  { params }: { params: { slug: string } },
+) => {
+  const { slug } = params;
+  try {
+    const data = await getOne(slug);
+    return NextResponse.json(data, { status: 200, statusText: "OK" });
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 404 },
+    );
+  }
+};
 
 export const DELETE = async (
   req: NextRequest,
@@ -24,7 +41,7 @@ export const PUT = async (
   { params }: { params: { slug: string } },
 ) => {
   const body = await req.json();
-  const { slug } = params;  
+  const { slug } = params;
 
   try {
     const data = editOne(slug, body);

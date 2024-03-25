@@ -24,7 +24,8 @@ export const getAll = async (
     include: {
       cat: {
         select: {
-          title: true
+          title: true,
+          color: true
         }
       },
       user: {
