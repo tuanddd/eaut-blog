@@ -119,6 +119,7 @@ model Notification {
   endTo DateTime 
   isExpired Boolean @default(false)
   isStarted Boolean @default(false)
+  isModified Boolean @default(false)
   userEmail String
   user User @relation(fields: [userEmail], references: [email])
 }
