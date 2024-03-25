@@ -24,7 +24,7 @@ export const PUT = async (
   { params }: { params: { slug: string } },
 ) => {
   const body = await req.json();
-  const { slug } = params;
+  const { slug } = params;  
 
   try {
     const data = editOne(slug, body);

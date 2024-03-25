@@ -22,6 +22,11 @@ export const getAll = async (
       ...(userEmail && { userEmail }),
     },
     include: {
+      cat: {
+        select: {
+          title: true
+        }
+      },
       user: {
         select: {
           email: true,
