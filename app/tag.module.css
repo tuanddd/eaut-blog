@@ -1,0 +1,57 @@
+.tag {
+  --sky: #7dd4fc50;
+  --rose: #fda4af50;
+  --yellow: #fde04750;
+  --green: #4ade8050;
+  --purple: #e879f950;
+  --red: #f43f5e50;
+
+  --sky-hover: #7dd4fc;
+  --rose-hover: #fda4af;
+  --yellow-hover: #fde047;
+  --green-hover: #4ade80;
+  --purple-hover: #e879f9;
+  --red-hover: #f43f5e;
+}
+
+.tag-sky {
+  background-color: var(--sky);
+}
+.tag-sky:hover {
+  background-color: var(--sky-hover);
+}
+
+.tag-rose {
+  background-color: var(--rose);
+}
+.tag-rose:hover {
+  background-color: var(--rose-hover);
+}
+
+.tag-yellow {
+  background-color: var(--yellow);
+}
+.tag-yellow:hover {
+  background-color: var(--yellow-hover);
+}
+
+.tag-purple {
+  background-color: var(--purple);
+}
+.tag-purple:hover {
+  background-color: var(--purple-hover);
+}
+
+.tag-green {
+  background-color: var(--green);
+}
+.tag-green:hover {
+  background-color: var(--green-hover);
+}
+
+.tag-red {
+  background-color: var(--red);
+}
+.tag-red:hover {
+  background-color: var(--red-hover);
+}

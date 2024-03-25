@@ -3,7 +3,7 @@ import { Thread } from "@/type";
 import Image from "next/image";
 import Link from "next/link";
 
-const FeaturedPost = ({ data }: { data: Thread }) => {
+const FeaturedThread = ({ data }: { data: Thread }) => {
   
   return (
     <Card className="group relative aspect-video flex-[2] cursor-pointer overflow-hidden">
@@ -31,4 +31,4 @@ const FeaturedPost = ({ data }: { data: Thread }) => {
   );
 };
 
-export default FeaturedPost;
+export default FeaturedThread;

@@ -1,5 +1,5 @@
 import CategorySection from "@/components/(page)/homepage/category/category-section";
-import FeaturedPost from "@/components/(page)/homepage/featured-post";
+import FeaturedThread from "@/components/(page)/homepage/featured-thread";
 import HomeStatus from "@/components/(page)/homepage/home-status";
 import NotificationSection from "@/components/(page)/homepage/notification/notification-section";
 import { BASE_API_URL } from "@/lib/constants";
@@ -20,7 +20,7 @@ const HomePage = async () => {
     <div className="container flex flex-col gap-5">
       <HomeStatus />
       <div className="flex flex-col gap-5 md:flex-row">
-        <FeaturedPost data={data[0]}/>
+        <FeaturedThread data={data[0]}/>
         <Suspense>
           <NotificationSection />
         </Suspense>

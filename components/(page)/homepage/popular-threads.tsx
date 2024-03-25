@@ -13,7 +13,7 @@ import { Thread } from "@/lib/defination";
 import { useEffect, useState } from "react";
 // import { getAllThreads } from '@/lib/db/thread';
 
-const PopularPosts = ({ data }: { data: Thread[] }) => {
+const PopularThreads = ({ data }: { data: Thread[] }) => {
   return (
     <section className="flex flex-col">
       <Title>Popular Post</Title>
@@ -45,4 +45,4 @@ const PopularPosts = ({ data }: { data: Thread[] }) => {
   );
 };
 
-export default PopularPosts;
+export default PopularThreads;

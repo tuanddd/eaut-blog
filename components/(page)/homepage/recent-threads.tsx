@@ -6,7 +6,7 @@ import ThreadCard from "@/components/ui/thread-card";
 import Link from "next/link";
 import { Thread } from "@/lib/defination";
 
-const RecentPosts = async ({
+const RecentThreads = async ({
   className,
   itemOrientation,
   data,
@@ -18,7 +18,7 @@ const RecentPosts = async ({
   return (
     <section className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <Title>Recent Posts</Title>
+        <Title>Recent Threads</Title>
         <Button variant="outline" asChild>
           <Link href="/blog">All Thread</Link>
         </Button>
@@ -43,4 +43,4 @@ const RecentPosts = async ({
   );
 };
 
-export default RecentPosts;
+export default RecentThreads;
