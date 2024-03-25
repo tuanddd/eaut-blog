@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { inter } from "@/lib/fonts";
 import Providers from "@/components/providers";
-import Footer from "@/components/footer";
+import Footer from "@/components/shared/footer";
+import Header from "@/components/shared/header/header";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -21,9 +23,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} text-foreground md:space-y-3`}>
         <Providers>
-					{children}
-				<Footer />
-				</Providers>
+          <Suspense>
+            <Header />
+          </Suspense>
+          <main className="container min-h-screen space-y-3 bg-background text-foreground">
+            {children}
+          </main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
