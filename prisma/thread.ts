@@ -37,7 +37,7 @@ export const getAll = async (
       },
       _count: {
         select: {
-          vote: true,
+          votes: true,
         },
       },
     },
@@ -67,7 +67,7 @@ export const getOne = async (slug: string) => {
           comments: true,
         },
       },
-      vote: true,
+      votes: true
     },
   });
   return data;
@@ -149,23 +149,41 @@ export const deleteOne = async (slug: string) => {
 // Vote a thread
 export const voteThread = async (
   type: "UPVOTE" | "DOWNVOTE",
-  userEmail: string,
   slug: string,
+  userEmail: string,
 ) => {
-  //TODO: Check User first then Replace userEmail with session
 
-  const data = await prisma.thread.update({
+  const found = await prisma.threadVote.deleteMany({
     where: {
-      slug: slug,
-    },
-    data: {
-      vote: {
-        create: {
-          type: type,
-          userEmail: userEmail,
-        },
-      },
+      type: type,
+      threadSlug: slug,
+      userEmail: userEmail,
     },
   });
+  console.log(found.count);
+  
+  if (found.count !== 0) return found;
+
+  const data = await prisma.$transaction([
+    prisma.threadVote.deleteMany({
+      where: {
+        threadSlug: slug,
+        userEmail: userEmail,
+      },
+    }),
+    prisma.thread.update({
+      where: {
+        slug: slug,
+      },
+      data: {
+        votes: {
+          create: {
+            type: type,
+            userEmail: userEmail,
+          },
+        },
+      },
+    }),
+  ]);
   return data;
 };

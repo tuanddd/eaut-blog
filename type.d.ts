@@ -3,7 +3,7 @@ export enum Role {
   USER,
   WRITER,
   MODERATOR,
-  ADMIN
+  ADMIN,
 }
 
 export type User = {
@@ -14,7 +14,8 @@ export type User = {
   createdAt?: Date;
   threads?: Thread[];
   comments?: Comment[];
-  votes?: Vote[];
+  commentVotes?: CommentVote[];
+  threadVotes?: ThreadVote[];
   notifications?: Notification[];
   role: Role;
 };
@@ -42,7 +43,7 @@ export interface Thread {
   cat: Category;
   user: User;
   comments?: Comment[];
-  vote?: Vote[]
+  votes: ThreadVote[];
 }
 
 export interface SingleThread extends Thread {
@@ -56,16 +57,27 @@ export type Comment = {
   threadSlug: string;
   userEmail: string;
   user: User;
-  vote?: Vote[]
+  votes: CommentVote[];
   createdAt?: Date;
 };
 
-export type Vote = {
+export type CommentVote = {
   id: string;
-  type: 'upvote' | 'downvote'
+  type: "UPVOTE" | "DOWNVOTE";
   userEmail: string;
   user: User;
-}
+  commentId: string;
+  comment: Comment;
+};
+
+export type ThreadVote = {
+  id: string;
+  type: "UPVOTE" | "DOWNVOTE";
+  userEmail: string;
+  user: User;
+  threadSlug: string;
+  thread: Thread;
+};
 
 export type Notification = {
   id: string;
@@ -78,4 +90,4 @@ export type Notification = {
   userEmail: string;
   user: User;
   createdAt?: Date;
-}
+};

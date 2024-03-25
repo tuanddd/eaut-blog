@@ -23,7 +23,7 @@ const CommentSection = ({ threadSlug }: { threadSlug: string }) => {
 
   const [comment, setComment] = useState<string>("");
   const { data, mutate, isLoading } = useSWR<Comment[]>(
-    `${BASE_API_URL}/api/comment?threadSlug=${threadSlug}`,
+    `/api/comment?threadSlug=${threadSlug}`,
     fetcher,
   );
 
@@ -35,7 +35,7 @@ const CommentSection = ({ threadSlug }: { threadSlug: string }) => {
       body: JSON.stringify({
         content: comment,
         threadSlug,
-        userEmail: session?.data?.user?.email
+        userEmail: session?.data?.user?.email,
       }),
     });
     mutate();
@@ -79,7 +79,7 @@ const CommentSection = ({ threadSlug }: { threadSlug: string }) => {
         <div className="space-y-5">
           {isLoading
             ? "loading..."
-            : data?.map((item) => <CommentItem key={item.id} item={item} />)}
+            : data?.map((item) => <CommentItem key={item.id} item={item} mutate={mutate}/>)}
         </div>
       </div>
     </section>

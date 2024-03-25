@@ -1,13 +1,16 @@
 import BlogSide from "@/components/(page)/blog/blog-side";
 import CommentSection from "@/components/(page)/single-thread/comment-section";
+import ThreadVote from "@/components/(page)/single-thread/thread-vote";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import Title from "@/components/ui/title";
 import { BASE_API_URL } from "@/lib/constants";
 import { formatContent, formatDate } from "@/lib/utils";
+import { SingleThread as SingleThreadType } from "@/type";
 import { Bell, Bookmark } from "lucide-react";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 type Props = {
   params: { slug: string };
@@ -32,7 +35,7 @@ const SingleThread = async ({ params }: { params: { slug: string } }) => {
   const res = await fetch(`${BASE_API_URL}/api/thread/${slug}`, {
     cache: "no-store",
   });
-  const data = await res.json();
+  const data: SingleThreadType = await res.json();
   const html = formatContent(data.content);
 
   return (
@@ -71,7 +74,13 @@ const SingleThread = async ({ params }: { params: { slug: string } }) => {
                 dangerouslySetInnerHTML={{ __html: html }}
               ></div>
               <div className="my-4 border-y-2 text-center font-bold">
-                END OF ARTICLE
+                <Suspense>
+                  <ThreadVote
+                    voteData={data.votes}
+                    commentCount={data._count["comments"]}
+                    slug={slug}
+                  />
+                </Suspense>
               </div>
               <CommentSection threadSlug={params.slug} />
             </div>

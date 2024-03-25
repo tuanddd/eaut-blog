@@ -20,6 +20,15 @@ export const getAll = async (threadSlug: string) => {
           image: true,
         },
       },
+      votes: {
+        include: {
+          user: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
     },
   });
   return data;
@@ -58,20 +67,36 @@ export const voteComment = async (
   id: string,
   userEmail: string,
 ) => {
-  //TODO: Check User first then Replace userEmail with session
-
-  const data = await prisma.comment.update({
+  // check if user already upvoted or downvoted
+  const found = await prisma.commentVote.deleteMany({
     where: {
-      id: id,
-    },
-    data: {
-      vote: {
-        create: {
-          type: type,
-          userEmail: userEmail,
-        },
-      },
+      type: type,
+      commentId: id,
+      userEmail: userEmail,
     },
   });
+  if (found.count !== 0) return found;
+
+  const data = await prisma.$transaction([
+    prisma.commentVote.deleteMany({
+      where: {
+        commentId: id,
+        userEmail: userEmail,
+      },
+    }),
+    prisma.comment.update({
+      where: {
+        id: id,
+      },
+      data: {
+        votes: {
+          create: {
+            type: type,
+            userEmail: userEmail,
+          },
+        },
+      },
+    }),
+  ]);
   return data;
 };

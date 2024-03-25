@@ -58,7 +58,8 @@ model User {
   sessions      Session[]
   threads       Thread[]
   comments      Comment[]
-  votes         Vote[]
+  commentVotes  CommentVote[]
+  threadVotes  ThreadVote[]
   notifications Notification[]
   Role          Role @default(USER)
 }
@@ -96,7 +97,7 @@ model Thread {
   userEmail String
   user      User      @relation(fields: [userEmail], references: [email])
   comments  Comment[]
-  vote      Vote[]
+  votes      ThreadVote[]
 }
 
 model Comment {
@@ -107,7 +108,7 @@ model Comment {
   thread      Thread     @relation(fields: [threadSlug], references: [slug])
   userEmail String
   user      User     @relation(fields: [userEmail], references: [email])
-  vote      Vote[]
+  votes      CommentVote[]
 }
 
 model Notification {
@@ -124,14 +125,21 @@ model Notification {
   user User @relation(fields: [userEmail], references: [email])
 }
 
-model Vote {
+model CommentVote {
   id String @id @default(cuid()) @map("_id")
   type VoteType
-  userEmail String
+  userEmail String @unique
   user User @relation(fields: [userEmail], references: [email])
-  commentId String?
-  comment Comment? @relation(fields: [commentId], references: [id])
-  threadSlug String?
-  thread Thread? @relation(fields: [threadSlug], references: [slug])
+  commentId String
+  comment Comment @relation(fields: [commentId], references: [id])
+  createdAt DateTime @default(now())
+}
+model ThreadVote {
+  id String @id @default(cuid()) @map("_id")
+  type VoteType
+  userEmail String @unique
+  user User @relation(fields: [userEmail], references: [email])
+  threadSlug String
+  thread Thread @relation(fields: [threadSlug], references: [slug])
   createdAt DateTime @default(now())
 }
