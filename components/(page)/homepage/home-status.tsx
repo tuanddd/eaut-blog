@@ -2,14 +2,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { UserType } from "@/lib/defination";
+import { User } from "@/type";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const HomeStatus = () => {
   const session = useSession();
-  const [user, setUser] = useState<UserType | any>();
+  const [user, setUser] = useState<User | any>();
 
   useEffect(() => {
     if (!session.data) return;

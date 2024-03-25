@@ -26,7 +26,7 @@ export default function RootLayout({
           <Suspense>
             <Header />
           </Suspense>
-          <main className="container min-h-screen space-y-3 bg-background text-foreground">
+          <main className="min-h-screen space-y-3 bg-background text-foreground">
             {children}
           </main>
           <Footer />

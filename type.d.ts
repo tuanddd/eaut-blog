@@ -6,20 +6,20 @@ export enum Role {
   ADMIN
 }
 
-export type UserType = {
+export type User = {
   id: string;
   name: string;
   email?: string;
   image?: string;
   createdAt?: Date;
   threads?: Thread[];
-  comments?: CommentType[];
-  votes?: VoteType[];
-  notifications?: NotificationType[];
+  comments?: Comment[];
+  votes?: Vote[];
+  notifications?: Notification[];
   role: Role;
 };
 
-export type CategoryType = {
+export type Category = {
   id: string;
   slug: string;
   title: string;
@@ -39,35 +39,35 @@ export interface Thread {
   createdAt?: string;
   catSlug: string;
   userEmail: string;
-  cat: CategoryType;
-  user: UserType;
-  comments?: CommentType[];
-  vote?: VoteType[]
+  cat: Category;
+  user: User;
+  comments?: Comment[];
+  vote?: Vote[]
 }
 
 export interface SingleThread extends Thread {
-  user: UserType;
+  user: User;
   _count: { comments: number };
 }
 
-export type CommentType = {
+export type Comment = {
   id: string;
   content: string;
   threadSlug: string;
   userEmail: string;
-  user: UserType;
-  vote?: VoteType[]
+  user: User;
+  vote?: Vote[]
   createdAt?: Date;
 };
 
-export type VoteType = {
+export type Vote = {
   id: string;
   type: 'upvote' | 'downvote'
   userEmail: string;
-  user: UserType;
+  user: User;
 }
 
-export type NotificationType = {
+export type Notification = {
   id: string;
   title: string;
   content: string;
@@ -76,6 +76,6 @@ export type NotificationType = {
   isExpired: boolean;
   isStarted: boolean;
   userEmail: string;
-  user: UserType;
+  user: User;
   createdAt?: Date;
 }

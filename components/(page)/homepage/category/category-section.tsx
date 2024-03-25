@@ -1,11 +1,11 @@
 import Title from "@/components/ui/title";
 import CategoryItem from "./category-item";
-import { CategoryType } from "@/type";
+import { Category} from "@/type";
 import { BASE_API_URL } from "@/lib/constants";
 
 const CategorySection = async () => {
   const res = await fetch(`${BASE_API_URL}/api/category`);
-  const data:CategoryType[] = await res.json();
+  const data:Category[] = await res.json();
 
   return (
     <section className="flex flex-col gap-4">
