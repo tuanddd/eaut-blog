@@ -2,6 +2,7 @@ import CategorySection from "@/components/(page)/homepage/category/category-sect
 import FeaturedThread from "@/components/(page)/homepage/featured-thread";
 import HomeStatus from "@/components/(page)/homepage/home-status";
 import NotificationSection from "@/components/(page)/homepage/notification/notification-section";
+import PopularThreads from "@/components/(page)/homepage/popular-threads";
 import RecentThreads from "@/components/(page)/homepage/recent-threads";
 import { BASE_API_URL } from "@/lib/constants";
 import { Suspense } from "react";
@@ -18,17 +19,17 @@ const HomePage = async () => {
   const data = await res.json();
 
   return (
-    <div className="container flex flex-col gap-5">
+    <div className="container flex flex-col gap-y-10">
       <HomeStatus />
-      <div className="flex flex-col gap-5 md:flex-row">
+      <section className="flex flex-col gap-5 md:flex-row">
         <FeaturedThread data={data[0]}/>
         <Suspense>
           <NotificationSection />
         </Suspense>
-      </div>
+      </section>
       <CategorySection />
       <RecentThreads data={data} />
-      {/* <PopularPosts data={data} /> */}
+      <PopularThreads data={data} />
     </div>
   );
 };

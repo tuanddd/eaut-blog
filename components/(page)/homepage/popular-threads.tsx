@@ -7,16 +7,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import ThreadCard from "@/components/ui/thread-card";
 import Title from "@/components/ui/title";
-import { Thread } from "@/lib/defination";
-import { useEffect, useState } from "react";
-// import { getAllThreads } from '@/lib/db/thread';
+import { Thread } from "@/type";
+import ThreadCard from "@/components/shared/thread-card";
 
 const PopularThreads = ({ data }: { data: Thread[] }) => {
   return (
     <section className="flex flex-col">
-      <Title>Popular Post</Title>
+      <Title>Popular Threads</Title>
       <Carousel
         plugins={[
           Autoplay({
