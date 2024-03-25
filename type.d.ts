@@ -24,7 +24,7 @@ export type CategoryType = {
   slug: string;
   title: string;
   color: string;
-  createdAt: Date;
+  createdAt?: Date;
   threads?: Thread[];
 };
 
@@ -36,7 +36,7 @@ export interface Thread {
   content: string;
   thumbnail?: string;
   views: Number;
-  createdAt: string;
+  createdAt?: string;
   catSlug: string;
   userEmail: string;
   cat: CategoryType;
@@ -55,9 +55,9 @@ export type CommentType = {
   content: string;
   threadSlug: string;
   userEmail: string;
-  createdAt: Date;
   user: UserType;
   vote?: VoteType[]
+  createdAt?: Date;
 };
 
 export type VoteType = {
@@ -71,11 +71,11 @@ export type NotificationType = {
   id: string;
   title: string;
   content: string;
-  createdAt: Date;
   startFrom: Date;
   endTo?: Date;
   isExpired: boolean;
   isStarted: boolean;
   userEmail: string;
   user: UserType;
+  createdAt?: Date;
 }

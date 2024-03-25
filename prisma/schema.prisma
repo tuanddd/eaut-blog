@@ -77,8 +77,8 @@ model Category {
   id        String   @id @default(cuid()) @map("_id")
   slug      String   @unique
   title     String
-  threads   Thread[]
   color     String
+  threads   Thread[]
   createdAt DateTime @default(now())
 }
 
@@ -117,8 +117,8 @@ model Notification {
   createdAt DateTime @default(now())
   startFrom DateTime @default(now())
   endTo DateTime 
-  isExpired Boolean
-  isStarted Boolean
+  isExpired Boolean @default(false)
+  isStarted Boolean @default(false)
   userEmail String
   user User @relation(fields: [userEmail], references: [email])
 }
