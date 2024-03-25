@@ -76,7 +76,6 @@ const SingleThread = async ({ params }: { params: { slug: string } }) => {
               <div className="my-4 border-y-2 text-center font-bold">
                 <Suspense>
                   <ThreadVote
-                    voteData={data.votes}
                     commentCount={data._count["comments"]}
                     slug={slug}
                   />
