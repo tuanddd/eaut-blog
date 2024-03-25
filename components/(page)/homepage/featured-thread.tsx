@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FeaturedThread = ({ data }: { data: Thread }) => {
-  
   return (
     <Card className="group relative aspect-video flex-[2] cursor-pointer overflow-hidden">
       <Link href={`/thread/${data.slug}`}>
@@ -20,7 +19,9 @@ const FeaturedThread = ({ data }: { data: Thread }) => {
         />
         <div className="absolute bottom-0 left-0 right-0 flex h-[50%] items-center bg-black/30 p-5 text-white md:h-[40%] lg:h-[35%]">
           <div className="w-[90%] md:w-[70%]">
-            <span className="text-md rounded-full border px-2">{data.cat.title}</span>
+            <span className="text-md rounded-full border px-2">
+              {data.cat.title}
+            </span>
             <h1 className="mt-2 line-clamp-2 text-lg font-semibold sm:text-2xl md:text-xl lg:text-2xl xl:text-3xl">
               {data.title}
             </h1>

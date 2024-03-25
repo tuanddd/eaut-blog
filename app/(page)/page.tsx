@@ -2,6 +2,7 @@ import CategorySection from "@/components/(page)/homepage/category/category-sect
 import FeaturedThread from "@/components/(page)/homepage/featured-thread";
 import HomeStatus from "@/components/(page)/homepage/home-status";
 import NotificationSection from "@/components/(page)/homepage/notification/notification-section";
+import RecentThreads from "@/components/(page)/homepage/recent-threads";
 import { BASE_API_URL } from "@/lib/constants";
 import { Suspense } from "react";
 
@@ -26,7 +27,7 @@ const HomePage = async () => {
         </Suspense>
       </div>
       <CategorySection />
-      {/* <RecentPosts data={data} /> */}
+      <RecentThreads data={data} />
       {/* <PopularPosts data={data} /> */}
     </div>
   );

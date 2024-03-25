@@ -36,7 +36,7 @@ export interface Thread {
   content: string;
   thumbnail?: string;
   views: Number;
-  createdAt?: string;
+  createdAt: string;
   catSlug: string;
   userEmail: string;
   cat: Category;

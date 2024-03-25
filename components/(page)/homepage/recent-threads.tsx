@@ -2,9 +2,9 @@ import Title from "@/components/ui/title";
 import { Button } from "@/components/ui/button";
 import { twMerge } from "tailwind-merge";
 // import { getAllThreads } from "@/lib/db/thread";
-import ThreadCard from "@/components/ui/thread-card";
+import ThreadCard from "@/components/shared/thread-card";
 import Link from "next/link";
-import { Thread } from "@/lib/defination";
+import { Thread } from "@/type";
 
 const RecentThreads = async ({
   className,
@@ -29,7 +29,7 @@ const RecentThreads = async ({
           className,
         )}
       >
-        {data && data.length > 0
+        {data
           ? data.map((thread) => (
               <ThreadCard
                 orientation={itemOrientation}
@@ -39,6 +39,7 @@ const RecentThreads = async ({
             ))
           : "There is nothing in this category"}
       </div>
+      TODO: Add Pagination here
     </section>
   );
 };
