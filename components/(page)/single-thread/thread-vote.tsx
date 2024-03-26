@@ -1,5 +1,4 @@
 "use client";
-import { BASE_API_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ThreadVote as VoteType } from "@/type";
 import { ArrowBigDown, ArrowBigUp, MessageCircle } from "lucide-react";
