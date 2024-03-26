@@ -23,8 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} text-foreground md:space-y-3`}>
-        <NextTopLoader />
         <Providers>
+          <NextTopLoader />
           <Suspense fallback={"loading header..."}>
             <Header />
           </Suspense>
