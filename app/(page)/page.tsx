@@ -6,6 +6,7 @@ import PopularThreads from "@/components/(page)/homepage/popular-threads";
 import RecentThreads from "@/components/(page)/homepage/recent-threads";
 import { BASE_API_URL } from "@/lib/constants";
 import { Suspense } from "react";
+export const runtime = "edge";
 
 const HomePage = async () => {
   const res = await fetch(`${BASE_API_URL}/api/thread`, {
