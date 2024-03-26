@@ -24,7 +24,7 @@ const ThreadVote = ({
   const { data, mutate, isLoading } = useSWR<{
     data: VoteType[];
     count: { UPVOTE: number; DOWNVOTE: number };
-  }>(`${BASE_API_URL}/api/thread-vote?threadSlug${slug}`, fetcher);
+  }>(`${BASE_API_URL}/api/thread-vote?threadSlug=${slug}`, fetcher);
 
   const session = useSession();
 

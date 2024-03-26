@@ -79,9 +79,7 @@ const SingleThread = async ({ params }: { params: { slug: string } }) => {
                   slug={slug}
                 />
               </div>
-              <Suspense fallback={"loading comment..."}>
-                <CommentSection threadSlug={params.slug} />
-              </Suspense>
+              <CommentSection threadSlug={params.slug} />
             </div>
             <BlogSide />
           </CardContent>
