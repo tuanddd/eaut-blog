@@ -23,14 +23,14 @@ const CommentSection = ({ threadSlug }: { threadSlug: string }) => {
 
   const [comment, setComment] = useState<string>("");
   const { data, mutate, isLoading } = useSWR<Comment[]>(
-    `${BASE_API_URL}/api/comment?threadSlug=${threadSlug}`,
+    `/api/comment?threadSlug=${threadSlug}`,
     fetcher,
   );
 
   const handleSubmit = async () => {
     if (!comment) return alert("Type some thing pls");
 
-    await fetch(`${BASE_API_URL}/api/comment`, {
+    await fetch(`/api/comment`, {
       method: "POST",
       body: JSON.stringify({
         content: comment,

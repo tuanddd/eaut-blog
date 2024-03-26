@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { ThreadVote as VoteType } from "@/type";
 import { ArrowBigDown, ArrowBigUp, MessageCircle } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import useSWR from "swr";
 
 const fetcher = async (url: string) => {
@@ -24,7 +25,7 @@ const ThreadVote = ({
   const { data, mutate, isLoading } = useSWR<{
     data: VoteType[];
     count: { UPVOTE: number; DOWNVOTE: number };
-  }>(`${BASE_API_URL}/api/thread-vote?threadSlug=${slug}`, fetcher);
+  }>(`/api/thread-vote?threadSlug=${slug}`, fetcher);
 
   const session = useSession();
 
@@ -35,7 +36,7 @@ const ThreadVote = ({
   const handleVote = async (type: "UPVOTE" | "DOWNVOTE") => {
     if (!session.data) return;
 
-    const res = await fetch(`${BASE_API_URL}/api/thread/${slug}?type=${type}`, {
+    const res = await fetch(`/api/thread/${slug}?type=${type}`, {
       method: "PUT",
       body: JSON.stringify(session.data.user?.email),
     });
@@ -65,10 +66,10 @@ const ThreadVote = ({
           <ArrowBigDown size={32} />
           <p>{data?.count.DOWNVOTE || 0} Downvote</p>
         </button>
-        <button className="flex flex-1 items-center justify-center gap-2 py-3 hover:bg-foreground/20 hover:text-foreground">
+        <Link href={'#comments'} className="flex flex-1 items-center justify-center gap-2 py-3 hover:bg-foreground/20 hover:text-foreground">
           <MessageCircle size={32} />
           <p>{commentCount} phản hồi</p>
-        </button>
+        </Link>
       </div>
     )
   );

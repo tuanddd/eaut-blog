@@ -14,7 +14,7 @@ const HomeStatus = () => {
   useEffect(() => {
     if (!session.data) return;
     setUser(session.data.user);
-  }, [session.data]);
+  }, [session]);
 
   return (
     user && (
