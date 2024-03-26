@@ -20,10 +20,10 @@ const Header = () => {
 
   useEffect(() => {
     const value = params.get("login");
-    
-    if(!!!value || value !== 'open') return;
 
-    if(session?.data?.user) return setOpen(false)
+    if (!!!value || value !== "open") return;
+
+    if (session?.data?.user) return setOpen(false);
     setOpen(true);
   }, [params]);
 
@@ -34,8 +34,11 @@ const Header = () => {
   };
 
   return (
-    <Dialog open={open || !!session?.data?.user} onOpenChange={handleOpenChange}>
-      <div className="container sticky top-0 z-10 flex h-16 items-center bg-background">
+    <Dialog
+      open={open || !!session?.data?.user}
+      onOpenChange={handleOpenChange}
+    >
+      <div className="container sticky top-0 z-[2] flex h-16 items-center bg-background">
         <nav className="flex flex-1 justify-between ">
           <HeaderLogo />
           <div className="flex items-center gap-4">
