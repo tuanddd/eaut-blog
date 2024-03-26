@@ -23,7 +23,7 @@ const CommentSection = ({ threadSlug }: { threadSlug: string }) => {
 
   const [comment, setComment] = useState<string>("");
   const { data, mutate, isLoading } = useSWR<Comment[]>(
-    `/api/comment?threadSlug=${threadSlug}`,
+    `${BASE_API_URL}/api/comment?threadSlug=${threadSlug}`,
     fetcher,
   );
 

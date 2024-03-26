@@ -24,11 +24,3 @@ export function formatDate(date: string) {
 
   return `${value[0]} ${value[1].slice(0, 5)}`;
 }
-
-export const fetcher = async (url: string) => {
-  const res = await fetch(url);
-  const data = await res.json();
-
-  if (!res.ok) throw new Error("Error fetching");
-  return data;
-};

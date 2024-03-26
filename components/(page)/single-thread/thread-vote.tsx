@@ -1,4 +1,5 @@
 "use client";
+import { BASE_API_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ThreadVote as VoteType } from "@/type";
 import { ArrowBigDown, ArrowBigUp, MessageCircle } from "lucide-react";
@@ -23,7 +24,7 @@ const ThreadVote = ({
   const { data, mutate, isLoading } = useSWR<{
     data: VoteType[];
     count: { UPVOTE: number; DOWNVOTE: number };
-  }>(`/api/thread-vote?threadSlug${slug}`, fetcher);
+  }>(`${BASE_API_URL}/api/thread-vote?threadSlug${slug}`, fetcher);
 
   const session = useSession();
 
@@ -34,7 +35,7 @@ const ThreadVote = ({
   const handleVote = async (type: "UPVOTE" | "DOWNVOTE") => {
     if (!session.data) return;
 
-    const res = await fetch(`/api/thread/${slug}?type=${type}`, {
+    const res = await fetch(`${BASE_API_URL}/api/thread/${slug}?type=${type}`, {
       method: "PUT",
       body: JSON.stringify(session.data.user?.email),
     });
