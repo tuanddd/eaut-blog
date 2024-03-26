@@ -20,7 +20,7 @@ const HomePage = async () => {
 
   return (
     <div className="container flex flex-col gap-y-10">
-      <Suspense fallback={'loading status ...'}>
+      <Suspense fallback={"loading status ..."}>
         <HomeStatus />
       </Suspense>
       <section className="flex flex-col gap-5 md:flex-row">
@@ -33,7 +33,9 @@ const HomePage = async () => {
       {data && (
         <>
           <RecentThreads data={data} />
-          <PopularThreads data={data} />
+          <Suspense>
+            <PopularThreads data={data} />
+          </Suspense>
         </>
       )}
     </div>

@@ -24,3 +24,13 @@ export function formatDate(date: string) {
 
   return `${value[0]} ${value[1].slice(0, 5)}`;
 }
+
+export function slugify(s: string) {
+  if (!s) return "";
+
+  return s
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-");
+}

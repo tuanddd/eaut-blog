@@ -10,6 +10,7 @@ import {
 import Title from "@/components/ui/title";
 import { Thread } from "@/type";
 import ThreadCard from "@/components/shared/thread-card";
+import { Suspense } from "react";
 
 const PopularThreads = ({ data }: { data: Thread[] }) => {
   return (
@@ -36,8 +37,6 @@ const PopularThreads = ({ data }: { data: Thread[] }) => {
               </CarouselItem>
             ))}
         </CarouselContent>
-        <CarouselPrevious className="hidden md:block" />
-        <CarouselNext className="hidden md:block" />
       </Carousel>
     </section>
   );

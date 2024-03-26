@@ -43,6 +43,9 @@ export const getAll = async (
     },
     take: postPerPage,
     skip: postPerPage * (page - 1),
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return data;
