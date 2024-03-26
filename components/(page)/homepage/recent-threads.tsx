@@ -1,7 +1,6 @@
 import Title from "@/components/ui/title";
 import { Button } from "@/components/ui/button";
 import { twMerge } from "tailwind-merge";
-// import { getAllThreads } from "@/lib/db/thread";
 import ThreadCard from "@/components/shared/thread-card";
 import Link from "next/link";
 import { Thread } from "@/type";

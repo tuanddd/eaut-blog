@@ -15,7 +15,7 @@ const HomePage = async () => {
     },
   });
 
-  const data = await res.json();
+  const data = res.ok && (await res.json());
 
   return (
     <div className="container flex flex-col gap-y-10">
@@ -23,14 +23,18 @@ const HomePage = async () => {
         <HomeStatus />
       </Suspense>
       <section className="flex flex-col gap-5 md:flex-row">
-        <FeaturedThread data={data[0]} />
+        {data && <FeaturedThread data={data[0]} />}
         <Suspense>
           <NotificationSection />
         </Suspense>
       </section>
       <CategorySection />
-      <RecentThreads data={data} />
-      <PopularThreads data={data} />
+      {data && (
+        <>
+          <RecentThreads data={data} />
+          <PopularThreads data={data} />
+        </>
+      )}
     </div>
   );
 };
