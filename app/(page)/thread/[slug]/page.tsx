@@ -70,18 +70,18 @@ const SingleThread = async ({ params }: { params: { slug: string } }) => {
               </div>
               <Separator />
               <div
-                className="prose dark:prose-invert max-w-full"
+                className="prose max-w-full dark:prose-invert"
                 dangerouslySetInnerHTML={{ __html: html }}
               ></div>
               <div className="my-4 border-y-2 text-center font-bold">
-                <Suspense>
-                  <ThreadVote
-                    commentCount={data._count["comments"]}
-                    slug={slug}
-                  />
-                </Suspense>
+                <ThreadVote
+                  commentCount={data._count["comments"]}
+                  slug={slug}
+                />
               </div>
-              <CommentSection threadSlug={params.slug} />
+              <Suspense fallback={"loading comment..."}>
+                <CommentSection threadSlug={params.slug} />
+              </Suspense>
             </div>
             <BlogSide />
           </CardContent>

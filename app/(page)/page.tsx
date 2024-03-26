@@ -19,12 +19,12 @@ const HomePage = async () => {
 
   return (
     <div className="container flex flex-col gap-y-10">
-      <Suspense>
+      <Suspense fallback={'loading status ...'}>
         <HomeStatus />
       </Suspense>
       <section className="flex flex-col gap-5 md:flex-row">
         {data && <FeaturedThread data={data[0]} />}
-        <Suspense>
+        <Suspense fallback={"loading"}>
           <NotificationSection />
         </Suspense>
       </section>

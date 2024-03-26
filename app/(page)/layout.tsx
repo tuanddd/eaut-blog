@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} text-foreground md:space-y-3`}>
         <Providers>
-          <Suspense>
+          <Suspense fallback={'loading header...'}>
             <Header />
           </Suspense>
           <main className="min-h-screen space-y-3 bg-background text-foreground">
