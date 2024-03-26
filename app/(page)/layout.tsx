@@ -6,6 +6,7 @@ import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header/header";
 import { Suspense } from "react";
 import NextTopLoader from "nextjs-toploader";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: {
@@ -33,6 +34,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -61,7 +61,7 @@ model User {
   commentVotes  CommentVote[]
   threadVotes  ThreadVote[]
   notifications Notification[]
-  Role          Role @default(USER)
+  role          Role @default(USER)
 }
 
 model VerificationToken {

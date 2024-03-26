@@ -1,3 +1,4 @@
+import { BASE_API_URL } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,7 +14,7 @@ const SidebarLogo = ({ expanded }: { expanded: boolean }) => {
 				EAUT Management
 			</h1>
 			<Link
-				href='./'
+				href={BASE_API_URL}
 				className={cn(
 					'block relative w-1/2 aspect-square m-auto transition-all',
 					{

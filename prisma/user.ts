@@ -1,7 +1,28 @@
 import prisma from "@/lib/connect";
 
-export const getAll = async () => {
-  const users = await prisma.user.findMany();
+export const getAll = async (
+  perPage: number,
+  page: number,
+  userId?: string,
+) => {
+  const users = await prisma.user.findMany({
+    where: {
+      ...(userId && { id: userId }),
+    },
+    include: {
+      _count: {
+        select: {
+          threads: true,
+          comments: true,
+          threadVotes: true,
+          commentVotes: true,
+        },
+      },
+    },
+    take: perPage,
+    skip: perPage * (page - 1),
+  });
+  
   return users;
 };
 
@@ -19,7 +40,6 @@ export const deleteOne = async (id: string) => {
   });
   return user;
 };
-
 
 //TODO: Add user here
 // interface CreateOne {

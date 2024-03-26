@@ -5,16 +5,18 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MoreVertical } from "lucide-react";
 import { useSession } from "next-auth/react";
+import RoleTag from "../users/role-tag";
 
 const SidebarAccount = ({ expanded }: { expanded: boolean }) => {
   const session = useSession();
+  const user:any = session?.data?.user
 
   return (
     <div className="flex border-t p-3 pb-2">
       <div className="m-auto aspect-square w-11 overflow-hidden rounded-lg p-1.5 hover:bg-primary/30">
         <Avatar className="h-full w-full">
           <AvatarImage
-            src={session?.data?.user?.image || ''}
+            src={user?.image || ''}
             className="h-full w-full object-cover"
           />
           <AvatarFallback>HB</AvatarFallback>
@@ -29,9 +31,12 @@ const SidebarAccount = ({ expanded }: { expanded: boolean }) => {
         )}
       >
         <div className="rounded-lg px-2 py-1.5 leading-4 hover:bg-yellow-300/30">
-          <h4 className="font-semibold">{session.data?.user?.name}</h4>
+          <div className="flex items-center gap-2">
+            <h4 className="font-semibold">{user?.name}</h4>
+            <RoleTag role={user?.role}/>
+          </div>
           <span className="text-xs text-gray-600 dark:text-gray-400">
-            {session.data?.user?.email}
+            {user?.email}
           </span>
         </div>
         <Button variant="ghost" className="ml-1 p-0 px-1">

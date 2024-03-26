@@ -16,7 +16,7 @@ const HomePage = async () => {
     },
   });
 
-  const data = res.ok && (await res.json());
+  const data = await res.json();
 
   return (
     <div className="container flex flex-col gap-y-10">

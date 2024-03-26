@@ -16,42 +16,51 @@ import SidebarLogo from "./sidebar-logo";
 import SidebarAccount from "./sidebar-account";
 import { ModeToggle } from "@/components/ui/theme-toggle";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const routes = [
   {
     icon: <LayoutDashboard />,
     path: "/management",
     text: "Dashboard",
+    notAllow: [],
   },
   {
     icon: <Megaphone />,
     path: "/management/notifications",
     text: "Notifications",
+    notAllow: ["WRITER"],
   },
   {
     icon: <Edit />,
     path: "/management/editor",
     text: "Text Editor",
+    notAllow: [],
   },
   {
     icon: <File />,
     path: "/management/threads",
     text: "Threads",
+    notAllow: [],
   },
   {
     icon: <User />,
     path: "/management/users",
     text: "Users",
+    notAllow: ["WRITER"],
   },
   {
     icon: <Layers2 />,
     path: "/management/categories",
     text: "Categories",
+    notAllow: ["WRITER", "MODERATOR"],
   },
 ];
 
 const Sidebar = () => {
   const [expanded, setExpanded] = useState(false);
+  const session = useSession();
+  const user: any = session?.data?.user;
 
   return (
     <aside className="relative flex h-screen w-fit flex-col">
@@ -65,12 +74,20 @@ const Sidebar = () => {
           <ChevronRight size={20} />
         )}
       </Button>
-      <nav className="flex h-full flex-col p-4">
+      <nav className="flex h-full flex-col p-2 md:p-4">
         <SidebarLogo expanded={expanded} />
         <div className="border-b-2 border-border py-2">
-          {routes.map((route) => (
-            <SidebarItem {...route} key={route.path} expanded={expanded} />
-          ))}
+          {user &&
+            routes.map(
+              (route) =>
+                !route.notAllow.find((r) => r === user.role) && (
+                  <SidebarItem
+                    {...route}
+                    key={route.path}
+                    expanded={expanded}
+                  />
+                ),
+            )}
         </div>
         <div className="py-2">
           <SidebarItem
@@ -78,6 +95,7 @@ const Sidebar = () => {
             icon={<Settings />}
             text="Settings"
             expanded={expanded}
+            notAllow={[]}
           />
           <div className="relative my-1 flex items-center rounded-md py-2 font-medium text-foreground transition-colors">
             <ModeToggle

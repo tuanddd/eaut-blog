@@ -1,10 +1,4 @@
-export enum Role {
-  NONE,
-  USER,
-  WRITER,
-  MODERATOR,
-  ADMIN,
-}
+export type Role = 'ADMIN' | 'MODERATOR' | 'WRITER' | 'USER' | 'NONE';
 
 export type User = {
   id: string;
@@ -17,7 +11,16 @@ export type User = {
   commentVotes?: CommentVote[];
   threadVotes?: ThreadVote[];
   notifications?: Notification[];
-  role: Role;
+  role: Role
+};
+
+export type AllUser = User & {
+  _count: {
+    threads: number;
+    comments: number;
+    threadVotes: number;
+    commentVotes: number;
+  };
 };
 
 export type Category = {
