@@ -4,10 +4,13 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { AllUser } from "@/type";
 import { File } from "lucide-react";
 import RoleTag from "./role-tag";
-import { BASE_API_URL } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 
 const UserCard = ({ data }: { data: AllUser }) => {
+  const session = useSession();
+  const user: any = session?.data?.user;
+  
   const handleDelete = async () => {
     //TODO: Add Alert Dialog to confirm first
     // const res = await fetch(`${BASE_API_URL}/api/user/${data.id}`, {
@@ -65,12 +68,12 @@ const UserCard = ({ data }: { data: AllUser }) => {
           </div>
         </div>
         <div className="mt-2 flex items-center justify-end gap-2">
-          {(data.role === "MODERATOR" || data.role === "ADMIN") && (
+          {(user?.role === "MODERATOR" || user?.role === "ADMIN") && (
             <Button variant="outline" onClick={handleEditRole}>
               Phân quyền
             </Button>
           )}
-          {data.role === "ADMIN" && (
+          {user?.role === "ADMIN" && (
             <Button variant="destructive" onClick={handleDelete}>
               Xóa
             </Button>

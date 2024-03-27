@@ -30,20 +30,17 @@ export async function generateMetadata({
   const data: Category = await res.json();
 
   return {
-    title: data ? `Bài viết về ${data.title}` : "Blog",
+    title: data ? data.title : "Blog",
   };
 }
 
 const BlogPage = async ({ searchParams }: Props) => {
-  const cat = searchParams.cat;
+  const cat = searchParams.cat || "";
   const res = await fetch(
-    `${BASE_API_URL}/api/thread?` +
-      new URLSearchParams(cat && { catSlug: cat }),
+    `${BASE_API_URL}/api/thread${cat ? "?catSlug=" + cat : ""}`,
     {
       method: "GET",
-      next: {
-        revalidate: 60,
-      },
+      cache: "no-store",
     },
   );
 
@@ -52,7 +49,7 @@ const BlogPage = async ({ searchParams }: Props) => {
   return (
     <div className="container flex flex-col gap-5 pb-3">
       {cat && <BlogTitle cat={cat} />}
-      <FeaturedPostBlog data={data[0]} />
+      {data[0] && <FeaturedPostBlog data={data[0]} />}
       <div className="flex gap-5">
         <div className="flex-[3]">
           <RecentThreads

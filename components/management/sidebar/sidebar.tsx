@@ -23,37 +23,37 @@ const routes = [
     icon: <LayoutDashboard />,
     path: "/management",
     text: "Dashboard",
-    notAllow: [],
+    notAllow: ["USER"],
   },
   {
     icon: <Megaphone />,
     path: "/management/notifications",
     text: "Notifications",
-    notAllow: ["WRITER"],
+    notAllow: ["WRITER", "USER"],
   },
   {
     icon: <Edit />,
     path: "/management/editor",
     text: "Text Editor",
-    notAllow: [],
+    notAllow: ["USER"],
   },
   {
     icon: <File />,
     path: "/management/threads",
     text: "Threads",
-    notAllow: [],
+    notAllow: ["USER"],
   },
   {
     icon: <User />,
     path: "/management/users",
     text: "Users",
-    notAllow: ["WRITER"],
+    notAllow: ["WRITER", "USER"],
   },
   {
     icon: <Layers2 />,
     path: "/management/categories",
     text: "Categories",
-    notAllow: ["WRITER", "MODERATOR"],
+    notAllow: ["WRITER", "MODERATOR", "USER"],
   },
 ];
 

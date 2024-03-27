@@ -2,19 +2,25 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import Title from "@/components/ui/title";
 import Link from "next/link";
-// import { getAllThreads } from '@/lib/db/thread';
 import { formatContent, formatDescription } from "@/lib/utils";
 import { Thread } from "@/type";
 import CategoryTag from "@/components/shared/category-tag";
 import Author from "@/components/shared/author";
+import { BASE_API_URL } from "@/lib/constants";
+import { useMemo } from "react";
 
 const FeaturedPostBlog = async ({ data }: { data: Thread }) => {
+
+  const content = useMemo(() => {
+    return formatContent(data.content)
+  }, [data.content])
+
   return (
     <Card className="border-none">
       <CardContent>
         <div className="flex flex-col gap-10 md:flex-row">
           <Link
-            href={`/thread/${data.slug}`}
+            href={`${BASE_API_URL}/thread/${data.slug}`}
             className="relative aspect-video flex-1 cursor-pointer overflow-hidden rounded-lg"
           >
             <Image
@@ -33,12 +39,12 @@ const FeaturedPostBlog = async ({ data }: { data: Thread }) => {
               <CategoryTag data={{...data.cat, slug: data.catSlug}} />
             </div>
 
-            <Link href={`/thread/${data.slug}`}>
+            <Link href={`${BASE_API_URL}/thread/${data.slug}`}>
               <Title className="pointer cursor-pointer hover:underline">
                 {data.title}
               </Title>
             </Link>
-            <p>{formatDescription(formatContent(data.content))}</p>
+            <p>{formatDescription(content, 300)}</p>
             <Author user={data.user} />
           </div>
         </div>
