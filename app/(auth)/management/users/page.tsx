@@ -5,7 +5,6 @@ import { BASE_API_URL } from "@/lib/constants";
 import { AllUser } from "@/type";
 import { Suspense } from "react";
 
-//I dont know what is this
 export const runtime = "edge";
 
 const UserPage = async () => {

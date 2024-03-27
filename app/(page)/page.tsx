@@ -7,7 +7,6 @@ import RecentThreads from "@/components/(page)/homepage/recent-threads";
 import { BASE_API_URL } from "@/lib/constants";
 import { Suspense } from "react";
 
-//I dont know what is this
 export const runtime = "edge";
 
 const HomePage = async () => {
