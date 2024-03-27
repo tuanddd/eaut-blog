@@ -7,22 +7,29 @@ import CommentItem from "./comment-item";
 import { Comment } from "@/type";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { fetcher } from "@/lib/utils";
+import { BASE_API_URL } from "@/lib/constants";
 
+const fetcher = async (url: string) => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (!res.ok) throw new Error("Error fetching");
+  return data;
+}
 
 const CommentSection = ({ threadSlug }: { threadSlug: string }) => {
   const session = useSession();
 
   const [comment, setComment] = useState<string>("");
   const { data, mutate, isLoading } = useSWR<Comment[]>(
-    `/api/comment?threadSlug=${threadSlug}`,
+    `${BASE_API_URL}/api/comment?threadSlug=${threadSlug}`,
     fetcher,
   );
 
   const handleSubmit = async () => {
     if (!comment) return alert("Type some thing pls");
 
-    await fetch(`/api/comment`, {
+    await fetch(`${BASE_API_URL}/api/comment`, {
       method: "POST",
       body: JSON.stringify({
         content: comment,

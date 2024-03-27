@@ -4,11 +4,18 @@ import { Thread } from "@/type";
 import ThreadPreview from "./thread-preview";
 import { usePathname, useRouter } from "next/navigation";
 import useSWR from "swr";
-import { fetcher } from "@/lib/utils";
 import { BASE_API_URL } from "@/lib/constants";
 import ThreadCard2 from "./thread-card2";
 import ConfirmDelete from "./confirm-delete";
 import { useState } from "react";
+
+const fetcher = async (url: string) => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (!res.ok) throw new Error("Error fetching");
+  return data;
+}
 
 const ListThread = ({ slug }: { slug: string }) => {
   const { data, mutate, isLoading } = useSWR<Thread[]>(

@@ -9,6 +9,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { BASE_API_URL } from "@/lib/constants";
 import { usePathname, useRouter } from "next/navigation";
 
 // TODO: Handle alert delete when success
@@ -25,7 +26,7 @@ const ConfirmDelete = ({
   const pathname = usePathname();
 
   const handleDelete = async () => {
-    const res = await fetch(`/api/thread/${slug}`, {
+    const res = await fetch(`${BASE_API_URL}/api/thread/${slug}`, {
       method: "DELETE",
     });
     if (res.status === 404) return alert("Something went wrong");
