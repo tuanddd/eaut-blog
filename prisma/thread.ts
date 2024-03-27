@@ -121,7 +121,7 @@ interface EditOne {
   catSlug: string;
 }
 export const editOne = async (slug: string, body: EditOne) => {
-  //TODO: Check role or Author of this Thread firstt
+  //TODO: Check role or Author of this Thread first
   const data = await prisma.thread.update({
     where: {
       slug: slug,
