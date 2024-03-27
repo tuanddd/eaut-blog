@@ -1,8 +1,12 @@
+
 import RouteTitle from "@/components/management/RouteTitle";
 import SectionCard from "@/components/management/section-card";
 import UserCard from "@/components/management/users/user-card";
 import { BASE_API_URL } from "@/lib/constants";
 import { AllUser } from "@/type";
+
+//I dont know what is this
+export const runtime = "edge";
 
 const UserPage = async () => {
   const res = await fetch(`${BASE_API_URL}/api/user`, {
