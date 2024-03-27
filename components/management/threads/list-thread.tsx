@@ -39,7 +39,7 @@ const ListThread = ({ slug }: { slug: string }) => {
         ) : (
           "Loading content..."
         )}
-        {slug && <ThreadPreview data={find} />}
+        {slug && find && <ThreadPreview data={find} />}
       </Dialog>
       {slug && find && (
         <ConfirmDelete slug={find.slug} mutate={mutate} setOpen={setOpen} />

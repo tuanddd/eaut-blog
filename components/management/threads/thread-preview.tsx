@@ -14,7 +14,6 @@ import { useMemo } from "react";
 import { AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
 const ThreadPreview = ({ data }: { data: Thread }) => {
-  if (!data) return;
   const { title, slug, catSlug, thumbnail, id } = data;
   const router = useRouter();
 
@@ -45,31 +44,29 @@ const ThreadPreview = ({ data }: { data: Thread }) => {
   };
 
   return (
-    data && (
-      <DialogContent className="max-w-[60dvw]">
-        <DialogHeader className="border-b-2">
-          <DialogTitle>{data?.title}</DialogTitle>
-          <DialogDescription>({data?.slug})</DialogDescription>
-        </DialogHeader>
-        <div
-          className="prose max-h-[70dvh] max-w-full overflow-auto dark:prose-invert"
-          dangerouslySetInnerHTML={{
-            __html: content || "<div>nothing too see</div>",
-          }}
-        ></div>
-        <DialogFooter>
-          <Button onClick={handleEdit}>Edit</Button>
-          <AlertDialogTrigger asChild>
-            <Button
-              variant={"destructive"}
-              className="!bg-destructive hover:!bg-destructive/50"
-            >
-              Delete
-            </Button>
-          </AlertDialogTrigger>
-        </DialogFooter>
-      </DialogContent>
-    )
+    <DialogContent className="max-w-[60dvw]">
+      <DialogHeader className="border-b-2">
+        <DialogTitle>{title}</DialogTitle>
+        <DialogDescription>({slug})</DialogDescription>
+      </DialogHeader>
+      <div
+        className="prose max-h-[70dvh] max-w-full overflow-auto dark:prose-invert"
+        dangerouslySetInnerHTML={{
+          __html: content || "<div>nothing too see</div>",
+        }}
+      ></div>
+      <DialogFooter>
+        <Button onClick={handleEdit}>Edit</Button>
+        <AlertDialogTrigger asChild>
+          <Button
+            variant={"destructive"}
+            className="!bg-destructive hover:!bg-destructive/50"
+          >
+            Delete
+          </Button>
+        </AlertDialogTrigger>
+      </DialogFooter>
+    </DialogContent>
   );
 };
 
