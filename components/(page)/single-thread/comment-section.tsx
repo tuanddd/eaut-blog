@@ -7,16 +7,8 @@ import CommentItem from "./comment-item";
 import { Comment } from "@/type";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { BASE_API_URL } from "@/lib/constants";
+import { fetcher } from "@/lib/utils";
 
-// fetch function
-const fetcher = async (url: string) => {
-  const res = await fetch(url);
-  const data = await res.json();
-
-  if (!res.ok) throw new Error("Error fetching");
-  return data;
-};
 
 const CommentSection = ({ threadSlug }: { threadSlug: string }) => {
   const session = useSession();

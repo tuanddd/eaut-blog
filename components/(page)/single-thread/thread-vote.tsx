@@ -1,18 +1,10 @@
 "use client";
-import { cn } from "@/lib/utils";
+import { cn, fetcher } from "@/lib/utils";
 import { ThreadVote as VoteType } from "@/type";
 import { ArrowBigDown, ArrowBigUp, MessageCircle } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import useSWR from "swr";
-
-const fetcher = async (url: string) => {
-  const res = await fetch(url);
-  const data = await res.json();
-
-  if (!res.ok) throw new Error("Error fetching");
-  return data;
-};
 
 const ThreadVote = ({
   commentCount,

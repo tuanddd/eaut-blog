@@ -22,6 +22,7 @@ const MetadataInputs = ({
   setCategory: (e: any) => void;
   thumbnail: string;
 }) => {
+
   return (
     <CardContent className="space-y-4">
       <div className="flex items-center">

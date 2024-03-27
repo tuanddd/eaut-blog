@@ -17,8 +17,6 @@ import {
 } from "@/components/ui/dialog";
 import EditorPreview from "./editor-preview";
 import { Category } from "@/type";
-import { NextResponse } from "next/server";
-import { BASE_API_URL } from "@/lib/constants";
 import { slugify } from "@/lib/utils";
 
 const ThreadMetaData = ({
@@ -30,13 +28,16 @@ const ThreadMetaData = ({
 }) => {
   const [metaData, setMetaData] = useLocalStorage<any>("thread_metadata", {});
   const [isOpen, setIsOpen] = useState<boolean>(true);
-  const [loading, setLoading] = useState<boolean>(false);
   const [media, setMedia] = useState<Blob>();
 
   const [title, setTitle] = useState<string>(metaData.title || "");
   const [slug, setSlug] = useState<string>(metaData.slug || "");
   const [category, setCategory] = useState<string>(metaData.catSlug || "khoa");
   const [thumbnail, setThumbnail] = useState<string>(metaData.thumbnail || "");
+
+  useEffect(() => {
+    if (type !== "edit") setMetaData({ ...metaData, id: "" });
+  }, []);
 
   useEffect(() => {
     if (media) setThumbnail(URL.createObjectURL(media as File));
@@ -112,7 +113,6 @@ const ThreadMetaData = ({
             metaData={metaData}
             media={media}
             handleReset={handleReset}
-            loading={loading}
           />
         </Suspense>
       </DialogContent>

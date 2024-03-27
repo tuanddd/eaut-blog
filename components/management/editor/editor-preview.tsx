@@ -137,7 +137,6 @@ const EditorPreview = ({
       const res = handleAdd(thread);
       if (!res) return;
     }
-    return;
 
     handleReset();
     router.push("threads");

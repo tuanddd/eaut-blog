@@ -34,3 +34,11 @@ export function slugify(s: string) {
     .replace(/[^\w\s-]/g, "")
     .replace(/[\s_-]+/g, "-");
 }
+
+export const fetcher = async (url: string) => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (!res.ok) throw new Error("Error fetching");
+  return data;
+}
