@@ -3,7 +3,7 @@ const Temporary = () => {
 
   return (
     <div className="text-xl">
-      <h3>===Feature Available===</h3>
+      <h3>Feature Available</h3>
       <p>Login (Google Only)</p>
       <p>Homepage</p>
       <p>All thread page</p>
@@ -13,9 +13,9 @@ const Temporary = () => {
       <p>Comment (Last page)</p>
       <p>Notification</p>
       <hr className='my-4'/>
-      <h3 className='text-2xl'>===== Management =====</h3>
-      <>Add Thread</>
-      <>Edit Thread</>
+      <h3 className='text-2xl'>Management</h3>
+      <p>Add Thread</p>
+      <p>Edit Thread</p>
       <p>Delete Thread</p>
     </div>
   )
