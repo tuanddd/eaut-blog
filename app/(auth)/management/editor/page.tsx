@@ -6,6 +6,9 @@ import ThreadMetaData from "@/components/management/editor/thread-metadata";
 import { Metadata } from "next";
 import { BASE_API_URL } from "@/lib/constants";
 
+//I dont know what is this
+export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: "Text Editor",
   description: "Text editor for writers",
