@@ -54,7 +54,7 @@ const ConfirmDelete = ({
             className="!bg-destructive !text-destructive-foreground hover:!bg-destructive/50"
             onClick={handleDelete}
           >
-            I'm Sure
+            I{"'"}m Sure
           </Button>
         </AlertDialogAction>
       </AlertDialogFooter>

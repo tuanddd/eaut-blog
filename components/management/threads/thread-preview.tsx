@@ -13,14 +13,14 @@ import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
-const ThreadPreview = ({ data }: { data: Thread | undefined }) => {
+const ThreadPreview = ({ data }: { data: Thread }) => {
   if (!data) return;
   const { title, slug, catSlug, thumbnail, id } = data;
   const router = useRouter();
 
   const content = useMemo(() => {
-    if (data) return formatContent(data.content);
-  }, [data?.content]);
+    return formatContent(data.content);
+  }, [data.content]);
 
   const handleEdit = () => {
     window.localStorage.setItem(
